@@ -6,12 +6,12 @@ maybe you're like me and I can help you with this :)
 
 The plan is to create an easy command-line tool for (almost) all Linux Distros.
 
-# TOC
-1. [Install](#Install)
-2. [Example of usage](#Example_of_usage)
+- [ManjaroUpdate](#manjaroupdate)
+    - [Install](#install)
+    - [Example of Usage](#example-of-usage)
 
-# Install
+## Install
 You will first need Manjaro installed.
 Since I just started looking at bash, it might take a little bit to upload scripts for different linux distributions.
 
-# Example of usage
+## Example of Usage
