@@ -18,10 +18,10 @@ echo -e "${NONE}Please give me sudo-rights."
 echo 
 
 sudo pacman-key --init
-echo "Initialized the keyring."
+echo -e "${BOLD}Initialized the keyring."
 echo
 
-echo "${BOLD}Populating the keyring and refreshing it.. ${NONE}"
+echo -e "${BOLD}Populating the keyring and refreshing it.. ${NONE}"
 echo
 sudo pacman-key --populate archlinux manjaro
 sudo pacman-key --refresh-keys
