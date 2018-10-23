@@ -33,7 +33,7 @@ case $REPLY in
     y|Y)
 	echo "Updating the mirrorlist.."
 	echo
-	sudo pacman-mirrors -g --geoip;;
+	sudo pacman-mirrors --interactive --default;;
     n|N)
 	echo "Okay, not updating mirrorlist.";;
     * ) echo "Invalid";;
