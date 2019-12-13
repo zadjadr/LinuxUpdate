@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Terminal=true
-Name=ManjaroUpdate
-Icon=utilities-terminal
-Exec=xfce4-terminal -e "bash -c 'SCRIPT-POSITION;$SHELL'"
-Categories=Application;
-Name[en_US.utf8]=ManjaroUpdate
