@@ -13,14 +13,13 @@ UNDERLINE='\033[4m'
 clear
 
 echo -e "Checking your Distro.."
-DISTRO=cat /etc/*release | grep -oP 'ID_LIKE=\K\w+'
+DISTRO=$(cat /etc/*release | grep -oP 'ID_LIKE=\K\w+')
 
 echo -e "${BOLD}Hi, $USER, I'm updating ${GREEN}${DISTRO} ${NONE}${BOLD}for you."
 echo -e "${NONE}Please give me sudo-rights."
 echo 
 
-if [ $DISTRO == "arch" ]
-then
+if [ "$DISTRO" = "arch" ]; then
     sudo pacman-key --init
     echo -e "${BOLD}Initialized the keyring."
     echo
@@ -31,8 +30,7 @@ fi
 
 echo -e "${BOLD}Populating the keyring and refreshing it.. ${NONE}"
 echo
-if [ $DISTRO == "arch" ]
-then
+if [ "$DISTRO" = "arch" ]; then
     sudo pacman-key --populate archlinux manjaro
     sudo pacman-key --refresh-keys
 
@@ -62,7 +60,7 @@ then
     echo
 
     sudo pacman -Syu
-elif [ $DISTRO == "debian" ]
+elif [ "$DISTRO" = "debian" ]; then
     sudo rsync -az --progress keyring.debian.org::keyrings/keyrings/ .
     
     sudo apt-get update && apt-get upgrade
