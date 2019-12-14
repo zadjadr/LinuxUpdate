@@ -12,7 +12,6 @@ UNDERLINE='\033[4m'
 
 clear
 
-echo -e "Checking your Distro.."
 DISTRO=$(cat /etc/*release | grep -oP 'ID_LIKE=\K\w+')
 
 echo -e "${BOLD}Hi, $USER, I'm updating ${GREEN}${DISTRO} ${NONE}${BOLD}for you."
