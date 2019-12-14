@@ -23,9 +23,6 @@ if [ "$DISTRO" = "arch" ]; then
     sudo pacman-key --init
     echo -e "${BOLD}Initialized the keyring."
     echo
-else
-    echo -e "Sorry, I don't know how to update ${DISTRO}, yet."
-    exit 1
 fi
 
 echo -e "${BOLD}Populating the keyring and refreshing it.. ${NONE}"
@@ -60,10 +57,11 @@ if [ "$DISTRO" = "arch" ]; then
     echo
 
     sudo pacman -Syu
-elif [ "$DISTRO" = "debian" ]; then
-    sudo rsync -az --progress keyring.debian.org::keyrings/keyrings/ .
-    
-    sudo apt-get update && apt-get upgrade
+elif [ "$DISTRO" = "debian" ]; then    
+    sudo apt-get update && apt-get full-upgrade
+else
+    echo -e "Sorry, I don't know how to update ${DISTRO}, yet."
+    exit 1
 fi
 
 echo
