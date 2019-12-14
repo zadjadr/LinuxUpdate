@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=LinuxUpdate
+GenericName=Linux Updater
+Comment=Written by Xcalizorz
+Icon=utilities-terminal
+Exec=/path/to/update.sh
+Terminal=true
+Type=Application
+StartupNotify=true
+Categories=Application;
+

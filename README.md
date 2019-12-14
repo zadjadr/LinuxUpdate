@@ -1,42 +1,48 @@
-# ManjaroUpdate
+# LinuxUpdate
 
-This is a small bash script that can update Manjaro Linux, create a new mirrorlist and delete old stuff.
+This is a small bash script that can update all Arch and Debian Distros, create a new mirrorlist and delete old stuff (only arch).
 I didn't like typing all the code in everytime, so I created a small bash script - 
 maybe you're like me and I can help you with this :)
 \
 The plan is to create an easy command-line tool for (almost) all Linux Distros.
 
-- [ManjaroUpdate](#manjaroupdate)
-    - [Install](#install)
-        - [Init](#init)
-        - [Use the .desktop file](#use-the-desktop-file)
-    - [Example of Usage](#example-of-usage)
-        - [Updating the mirrorlist](#updating-the-mirrorlist)
-        - [Removing old stuff](#removing-old-stuff)
+- [LinuxUpdate](#LinuxUpdate)
+  - [Install](#Install)
+  - [Usage](#Usage)
+    - [Use the cli](#Use-the-cli)
+    - [Use the .desktop file](#Use-the-desktop-file)
+  - [Example of Usage on Manjaro](#Example-of-Usage-on-Manjaro)
+    - [Updating the mirrorlist](#Updating-the-mirrorlist)
+    - [Removing old stuff](#Removing-old-stuff)
 
 ## Install
 
-You will first need Manjaro installed.
+You will first need any Arch or Debian (e. g. Ubuntu) based Distro installed.
 Since I just started looking at bash, it might take a little bit to upload scripts for different linux distributions.
 
-### Init
+## Usage
 
-    $ chmod +x ManjaroUpdate.sh
-    $ ./ManjaroUpdate.sh
+### Use the cli
+
+```bash
+  $ cd /to/LinuxUpdate/
+  $ chmod +x LinuxUpdate.sh
+  $ ./LinuxUpdate.sh
+```
 
 ### Use the .desktop file
 
 Open the file in any texteditor and change the `Exec`-parameter
 \
-You need to insert the correct path to `ManjaroUpdate.sh`.
+You need to insert the correct path to `LinuxUpdate.sh`.
 
 Then give the neccessary permissions to run this file:
 
-    $ chmod +x ManjaroUpdate.desktop
+    $ chmod +x LinuxUpdate.desktop
 
 Now you have a shortcut and can start the update via double-click.
 
-## Example of Usage
+## Example of Usage on Manjaro
 
 ### Updating the mirrorlist
 
