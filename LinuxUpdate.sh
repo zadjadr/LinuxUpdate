@@ -13,6 +13,7 @@ UNDERLINE='\033[4m'
 clear
 
 DISTRO=$(cat /etc/*release | grep -oP 'ID_LIKE=\K\w+')
+REAL_DISTRO=$(cat /etc/*release | grep -oP '^ID=\K\w+')
 
 echo -e "${BOLD}Hi, $USER, I'm updating ${GREEN}${DISTRO} ${NONE}${BOLD}for you."
 echo -e "${NONE}Please give me sudo-rights."
@@ -27,7 +28,7 @@ fi
 echo -e "${BOLD}Populating the keyring and refreshing it.. ${NONE}"
 echo
 if [ "$DISTRO" = "arch" ]; then
-    sudo pacman-key --populate archlinux manjaro
+    sudo pacman-key --populate archlinux "$REAL_DISTRO"
     sudo pacman-key --refresh-keys
 
     echo
