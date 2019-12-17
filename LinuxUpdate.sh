@@ -75,7 +75,3 @@ else
     echo -e "Sorry, I don't know how to update ${DISTRO}, yet."
     exit 1
 fi
-
-echo
-
-
