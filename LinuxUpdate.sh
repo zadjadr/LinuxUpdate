@@ -26,7 +26,7 @@ function update_arch_based_mirror_lists() {
     fi
 }
 
-echo -e "${BOLD}Hi, $USER, I'm updating ${GREEN}${REAL_DISTRO} ${CYAN}(${DISTRO}-based) ${NONE}${BOLD}for you."
+echo -e "${BOLD}Hi, $USER, I'm updating ${CYAN}${REAL_DISTRO} ${NONE}${BOLD}for you."
 echo -e "${NONE}Please give me sudo-rights."
 echo 
 
