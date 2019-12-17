@@ -15,7 +15,18 @@ clear
 DISTRO=$(cat /etc/*release | grep -oP 'ID_LIKE=\K\w+')
 REAL_DISTRO=$(cat /etc/*release | grep -oP '^ID=\K\w+')
 
-echo -e "${BOLD}Hi, $USER, I'm updating ${GREEN}${DISTRO} ${NONE}${BOLD}for you."
+function update_arch_based_mirror_lists() {
+    if [ "$REAL_DISTRO" != "arch" ]; then
+        sudo pacman-mirrors --interactive --default
+    else
+        cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+        echo "/etc/pacman.d/mirrorlist -> /etc/pacman.d/mirrorlist.backup"
+        sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup
+        rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
+    fi
+}
+
+echo -e "${BOLD}Hi, $USER, I'm updating ${GREEN}${REAL_DISTRO} ${CYAN}(${DISTRO}-based) ${NONE}${BOLD}for you."
 echo -e "${NONE}Please give me sudo-rights."
 echo 
 
@@ -36,27 +47,28 @@ if [ "$DISTRO" = "arch" ]; then
     echo
     case $REPLY in
         y|Y)
-        echo "Updating the mirrorlist.."
-        echo
-        sudo pacman-mirrors --interactive --default;;
+            echo "Updating the mirrorlist.."
+            echo
+            update_arch_based_mirror_lists;;
         n|N)
-        echo "Okay, not updating mirrorlist.";;
+            echo "Okay, not updating mirrorlist.";;
         * ) echo "Invalid";;
     esac
+
+    sudo pacman -Syu
+
     read -p $'\033[1m\033[01;32m::\033[00m\033[1m Do you want to clear pacmans cache? (y/n)  \033[00m' -n 1 -r
     echo
     case $REPLY in
         y|Y)
             echo -e "${RED}Removing ${NONE}old stuff from your cache.."
-        echo
-        sudo pacman -Sc;;
+            echo
+            sudo pacman -Sc;;
         n|N)
-        echo "Okay, not clearing pacmans cache.";;
+            echo "Okay, not clearing pacmans cache.";;
         * ) echo "Invalid";;
     esac
     echo
-
-    sudo pacman -Syu
 elif [ "$DISTRO" = "debian" ]; then    
     sudo apt-get update && apt-get full-upgrade
 else

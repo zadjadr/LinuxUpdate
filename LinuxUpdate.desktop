@@ -2,7 +2,7 @@
 Name=LinuxUpdate
 GenericName=Linux Updater
 Comment=Written by Xcalizorz
-Icon=utilities-terminal
+Icon=system-software-update
 Exec=/path/to/update.sh
 Terminal=true
 Type=Application
