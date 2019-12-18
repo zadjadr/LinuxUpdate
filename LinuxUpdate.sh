@@ -70,7 +70,8 @@ if [ "$DISTRO" = "arch" ]; then
     esac
     echo
 elif [ "$DISTRO" = "debian" ]; then    
-    sudo apt-get update && apt-get full-upgrade
+    sudo apt-get update
+    sudo apt-get full-upgrade
 else
     echo -e "Sorry, I don't know how to update ${DISTRO}, yet."
     exit 1
