@@ -28,17 +28,15 @@ function update_arch_based_mirror_lists() {
 
 echo -e "${BOLD}Hi, $USER, I'm updating ${CYAN}${REAL_DISTRO} ${NONE}${BOLD}for you."
 echo -e "${NONE}Please give me sudo-rights."
-echo 
+echo
 
 if [ "$DISTRO" = "arch" ]; then
     sudo pacman-key --init
     echo -e "${BOLD}Initialized the keyring."
     echo
-fi
 
-echo -e "${BOLD}Populating the keyring and refreshing it.. ${NONE}"
-echo
-if [ "$DISTRO" = "arch" ]; then
+    echo -e "${BOLD}Populating the keyring and refreshing it.. ${NONE}"
+    echo
     sudo pacman-key --populate archlinux "$REAL_DISTRO"
     sudo pacman-key --refresh-keys
 
