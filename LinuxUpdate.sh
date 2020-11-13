@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NONE='\033[00m'
+RESET='\033[00m'
 RED='\033[01;31m'
 GREEN='\033[01;32m'
 YELLOW='\033[01;33m'
@@ -10,9 +10,7 @@ WHITE='\033[01;37m'
 BOLD='\033[1m'
 UNDERLINE='\033[4m'
 
-clear
-
-DISTRO=$(cat /etc/*release | grep -oP 'ID_LIKE=\K\w+')
+BASE_DISTRO=$(cat /etc/*release | grep -oP 'ID_LIKE=\K\w+')
 REAL_DISTRO=$(cat /etc/*release | grep -oP '^ID=\K\w+')
 
 function update_arch_based_mirror_lists() {
@@ -30,12 +28,12 @@ echo -e "${BOLD}Hi, $USER, I'm updating ${CYAN}${REAL_DISTRO} ${NONE}${BOLD}for 
 echo -e "${NONE}Please give me sudo-rights."
 echo
 
-if [ "$DISTRO" = "arch" ]; then
+if [ "$BASE_DISTRO" = "arch" ]; then
     sudo pacman-key --init
     echo -e "${BOLD}Initialized the keyring."
     echo
 
-    echo -e "${BOLD}Populating the keyring and refreshing it.. ${NONE}"
+    echo -e "${BOLD}Populating the keyring and refreshing it.. ${RESET}"
     echo
     sudo pacman-key --populate archlinux "$REAL_DISTRO"
     sudo pacman-key --refresh-keys
@@ -67,10 +65,10 @@ if [ "$DISTRO" = "arch" ]; then
         * ) echo "Invalid";;
     esac
     echo
-elif [ "$DISTRO" = "debian" ]; then    
+elif [ "$DISTRO" = "debian" ]; then
     sudo apt-get update
     sudo apt-get full-upgrade
 else
-    echo -e "Sorry, I don't know how to update ${DISTRO}, yet."
+    echo -e "Sorry, I don't know how to update ${BASE_DISTRO}, yet."
     exit 1
 fi
