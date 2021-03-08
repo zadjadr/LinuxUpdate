@@ -36,16 +36,12 @@ function install_yay() {
             y|Y)
                 echo -e "\n Installing yay - version 10.1.0"
                 mkdir /tmp/yay && cd /tmp/yay
-                curl -LJO https://github.com/Jguer/yay/releases/download/v10.1.0/yay_10.1.0_x86_64.tar.gz
-                tar xfz yay_10.1.0_x86_64.tar.gz
-                sudo mv yay_10.1.0_x86_64/yay /usr/local/bin/yay
-                rm -r -f yay*
-                yay -Syu;;
-            n|N)
-                echo "Okay.";;
-            *)
-                echo "Invalid";;
-        esac
+        URL=$(curl -s https://api.github.com/repos/Jguer/yay/releases/latest | grep "browser_download_url.*${$(uname -m)}.*\.tar\.gz" | cut -d '"' -f 4 )
+        curl -LJ $URL -o yay.tar.gz
+        tar xfz yay.tar.gz
+        sudo mv yay*/yay /usr/local/bin/yay
+        rm -r -f yay*
+        yay -Syu
     fi
 }
 
