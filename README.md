@@ -1,7 +1,9 @@
 # LinuxUpdate
 
+[![LinuxUpdate on Ubuntu & Arch](https://github.com/Xcalizorz/LinuxUpdate/actions/workflows/test-update.yml/badge.svg)](https://github.com/Xcalizorz/LinuxUpdate/actions/workflows/test-update.yml)
+
 This is a small bash script that can update all Arch and Debian Distros, create a new mirrorlist and delete old stuff (only arch).
-I didn't like typing all the code in everytime, so I created a small bash script - 
+I didn't like typing all the code in everytime, so I created a small bash script -
 maybe you're like me and I can help you with this :)
 \
 The plan is to create an easy command-line tool for (almost) all Linux Distros.
@@ -21,6 +23,24 @@ You will first need any Arch or Debian (e. g. Ubuntu) based Distro installed.
 Since I just started looking at bash, it might take a little bit to upload scripts for different linux distributions.
 
 ## Usage
+
+### Prerequisites
+
+#### Arch based
+
+Install the following packages, to make this script work:
+
+```bash
+  pacman -S sudo reflector
+```
+
+#### Debian based
+
+Install the following packages, to make this script work:
+
+```bash
+  apt install bash sudo
+```
 
 ### Use the cli
 
