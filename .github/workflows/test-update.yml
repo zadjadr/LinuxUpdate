@@ -2,35 +2,49 @@
 
 name: Test LinuxUpdate
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  ubuntu_check:
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
+      - name: Install prerequisites
+        run: |
+          sudo apt update
+          sudo apt install bash sudo
+
       - name: Run ./LinuxUpdate.sh
         run: ./LinuxUpdate.sh
 
-      # Runs a set of commands using the runners shell
-      - name: Done
+  arch_check:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # https://github.com/qutebrowser/qutebrowser/commit/478e4de7bd1f26bebdcdc166d5369b2b5142c3e2
+      - name: Workaround glibc issue
         run: |
-          echo Everything worked fine. :) 
+          patched_glibc=glibc-linux4-2.33-4-x86_64.pkg.tar.zst && \
+          curl -LO "https://repo.archlinuxcn.org/x86_64/$patched_glibc" && \
+          bsdtar -C / -xvf "$patched_glibc"
+
+      - name: Install prerequisites
+        run: |
+          pacman -Syyu --noconfirm
+          pacman -S sudo reflector --noconfirm
+
+      - name: Run ./LinuxUpdate.sh
+        run: ./LinuxUpdate.sh
